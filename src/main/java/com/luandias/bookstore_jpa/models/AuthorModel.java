@@ -1,13 +1,20 @@
 package com.luandias.bookstore_jpa.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +29,10 @@ public class AuthorModel implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String name;
 
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+	private Set<BookModel> books = new HashSet<>();
+	
 	public UUID getId() {
 		return id;
 	}

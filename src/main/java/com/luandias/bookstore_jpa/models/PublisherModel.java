@@ -31,7 +31,7 @@ public class PublisherModel implements Serializable {
 	
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "publisher", fetch = FetchType.LAZY)
-	private Set<BookModel> book = new HashSet<>();
+	private Set<BookModel> books = new HashSet<>();
 
 	public UUID getId() {
 		return id;
@@ -49,12 +49,12 @@ public class PublisherModel implements Serializable {
 		this.name = name;
 	}
 
-	public Set<BookModel> getBook() {
-		return book;
+	public Set<BookModel> getBooks() {
+		return books;
 	}
 
-	public void setBook(Set<BookModel> book) {
-		this.book = book;
+	public void setBooks(Set<BookModel> books) {
+		this.books = books;
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.luandias.bookstore_jpa.models;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -27,6 +31,13 @@ public class BookModel implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "publisher_id")
 	private PublisherModel publisher;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "tb_book_author", 
+			joinColumns = @JoinColumn(name = "book_id"),
+			inverseJoinColumns = @JoinColumn(name = "author_id"))
+	private Set<AuthorModel> authors = new HashSet<>();
 
 	public UUID getId() {
 		return id;
