@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +23,10 @@ public class BookModel implements Serializable {
 
 	@Column(nullable = false, unique = true)
 	private String title;
+
+	@ManyToOne
+	@JoinColumn(name = "publisher_id")
+	private PublisherModel publisher;
 
 	public UUID getId() {
 		return id;
@@ -36,6 +42,14 @@ public class BookModel implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public PublisherModel getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(PublisherModel publisher) {
+		this.publisher = publisher;
 	}
 
 }
