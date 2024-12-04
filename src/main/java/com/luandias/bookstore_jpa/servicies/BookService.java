@@ -1,5 +1,6 @@
 package com.luandias.bookstore_jpa.servicies;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class BookService {
 	public BookModel saveBook(BookRecordDTO bookRecordDTO) {
 		BookModel book = new BookModel();
 		book.setTitle(bookRecordDTO.title());
-		book.setPublisher(publisherRepository.findById(bookRecordDTO.publisherId()).orElseThrow());
+		book.setPublisher(publisherRepository.findById(bookRecordDTO.publisherId()).get());
 		book.setAuthors(authorRepository.findAllById(bookRecordDTO.authorIds()).stream().collect(Collectors.toSet()));
 
 		ReviewModel reviewModel = new ReviewModel();
@@ -38,6 +39,10 @@ public class BookService {
 		book.setReview(reviewModel);
 
 		return bookRepository.save(book);
+	}
+	
+	public List<BookModel> getAllBooks(){
+		return bookRepository.findAll();
 	}
 
 }
