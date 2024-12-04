@@ -1,6 +1,7 @@
 package com.luandias.bookstore_jpa.servicies;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -43,6 +44,11 @@ public class BookService {
 	
 	public List<BookModel> getAllBooks(){
 		return bookRepository.findAll();
+	}
+	
+	@Transactional
+	public void deleteBook(UUID id) {
+		bookRepository.deleteById(id);
 	}
 
 }
