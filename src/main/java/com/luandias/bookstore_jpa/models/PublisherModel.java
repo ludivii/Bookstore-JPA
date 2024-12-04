@@ -23,7 +23,8 @@ public class PublisherModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(36)", length = 36)
 	private UUID id;
 
 	@Column(nullable = false, unique = true)

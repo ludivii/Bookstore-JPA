@@ -29,7 +29,7 @@ public class BookService {
 	public BookModel saveBook(BookRecordDTO bookRecordDTO) {
 		BookModel book = new BookModel();
 		book.setTitle(bookRecordDTO.title());
-		book.setPublisher(publisherRepository.findById(bookRecordDTO.publisherId()).get());
+		book.setPublisher(publisherRepository.findById(bookRecordDTO.publisherId()).orElseThrow());
 		book.setAuthors(authorRepository.findAllById(bookRecordDTO.authorIds()).stream().collect(Collectors.toSet()));
 
 		ReviewModel reviewModel = new ReviewModel();
