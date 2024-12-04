@@ -49,4 +49,12 @@ public class AuthorModel implements Serializable {
 		this.name = name;
 	}
 
+	public Set<BookModel> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Set<BookModel> books) {
+		this.books = books;
+	}
+
 }
